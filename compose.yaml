@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: obmep_dev
+      POSTGRES_USER: obmep
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - obmep_db:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "127.0.0.1", "-U", "obmep", "-d", "obmep_dev"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  obmep_db:

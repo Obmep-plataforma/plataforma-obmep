@@ -1,0 +1,10 @@
+spring:
+  config:
+    import: "file:./.env[.properties]"
+  datasource:
+    url: jdbc:postgresql://localhost:5433/obmep_dev
+    username: obmep
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
