@@ -1,0 +1,18 @@
+services:
+  db:
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/obmep_dev
+      SPRING_DATASOURCE_USERNAME: obmep
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no .env}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
