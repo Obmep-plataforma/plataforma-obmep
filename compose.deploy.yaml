@@ -12,7 +12,12 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: validate
     ports:
       - "127.0.0.1:8080:8080"
+    volumes:
+      - obmep_uploads:/app/uploads
     depends_on:
       db:
         condition: service_healthy
     restart: unless-stopped
+
+volumes:
+  obmep_uploads:
