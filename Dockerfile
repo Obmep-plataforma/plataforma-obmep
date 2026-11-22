@@ -14,6 +14,8 @@ WORKDIR /app
 
 COPY --from=build /build/target/*.jar app.jar
 
+RUN mkdir -p /app/uploads && chown 10001:10001 /app/uploads
+
 USER 10001:10001
 
 EXPOSE 8080
